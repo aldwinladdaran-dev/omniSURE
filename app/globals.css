@@ -14,37 +14,3 @@ label{font-size:13px;color:var(--muted);display:block;margin-bottom:4px}
 .badge{font-size:12px;padding:2px 8px;border-radius:999px;background:#eef2ff;color:var(--accent)}
 h1{font-size:22px}h2{font-size:18px}
 .muted{color:var(--muted);font-size:14px}
-EOFcat > app/layout.tsx << 'EOF'
-import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import type { ReactNode } from "react";
-export const metadata = { title: "Omnisure", description: "Your Insurance Advisory Operating System" };
-export default function RootLayout({ children }: { children: ReactNode }) {
-  return (
-    <ClerkProvider>
-      <html lang="en"><body>{children}</body></html>
-    </ClerkProvider>
-  );
-}
-EOFcat > app/page.tsx << 'EOF'
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
-import Link from "next/link";
-export default function Home() {
-  const { userId } = auth();
-  if (userId) redirect("/dashboard");
-  return (
-    <div className="container" style={{textAlign:"center",paddingTop:100}}>
-      <h1>Omnisure</h1>
-      <p className="muted">Your Insurance Advisory Operating System</p>
-      <Link href="/sign-in" className="btn">Enter Omnisure</Link>
-    </div>
-  );
-}
-EOFmkdir -p "app/sign-in/[[...sign-in]]" "app/sign-up/[[...sign-up]]"
-
-cat > "app/sign-in/[[...sign-in]]/page.tsx" << 'EOF'
-import { SignIn } from "@clerk/nextjs";
-export default function Page() {
-  return <div style={{display:"flex",justifyContent:"center",paddingTop:60}}><SignIn /></div>;
-}
