@@ -1,8 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-export default function Home() {
-  const { userId } = auth();
+export default async function Home() {
+  const { userId } = await auth();
   if (userId) redirect("/dashboard");
   return (
     <div className="container" style={{textAlign:"center",paddingTop:100}}>
