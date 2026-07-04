@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <ClerkProvider dynamic>
+    <ClerkProvider publishableKey="pk_test_Y2xldmVyLXB1cC0xMC5qbGVyay5hY2NvdW50cy5kZXYk">
       <html lang="en">
         <body>{children}</body>
       </html>
